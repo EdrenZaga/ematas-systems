@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro Study Timer</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app-container">
+    <header class="app-header">
+      <div class="header-top">
+        <h1 class="app-title">Study Timer</h1>
+        <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+          <span id="theme-icon" class="theme-icon">🌙</span>
+        </button>
+      </div>
+      <p class="app-subtitle">Focus, rest, and repeat with the Pomodoro technique</p>
+    </header>
+
+    <section class="timer-card">
+      <!-- Mode Selection Tabs -->
+      <nav class="mode-tabs" aria-label="Timer modes">
+        <button type="button" class="mode-btn active" data-mode="pomodoro" data-time="1500">Focus (25m)</button>
+        <button type="button" class="mode-btn" data-mode="shortBreak" data-time="300">Short Break (5m)</button>
+        <button type="button" class="mode-btn" data-mode="longBreak" data-time="900">Long Break (15m)</button>
+      </nav>
+
+      <!-- Circular Timer Display -->
+      <div class="timer-display-wrapper">
+        <svg class="progress-ring" viewBox="0 0 260 260">
+          <circle class="progress-ring-bg" cx="130" cy="130" r="115" />
+          <circle id="progress-ring-bar" class="progress-ring-bar" cx="130" cy="130" r="115" />
+        </svg>
+
+        <div class="timer-display">
+          <span id="time-display" class="time-text">25:00</span>
+          <span id="mode-status" class="mode-status">Focus Session</span>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls">
+        <button type="button" id="start-btn" class="btn btn-primary" aria-label="Start timer">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+          <span>Start</span>
+        </button>
+
+        <button type="button" id="pause-btn" class="btn btn-secondary" aria-label="Pause timer" disabled>
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+          </svg>
+          <span>Pause</span>
+        </button>
+
+        <button type="button" id="reset-btn" class="btn btn-outline" aria-label="Reset timer">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+          </svg>
+          <span>Reset</span>
+        </button>
+      </div>
+
+      <!-- Footer Info -->
+      <footer class="timer-footer">
+        <div class="session-counter">
+          <span>Completed Focus Sessions: </span>
+          <strong id="session-count">0</strong>
+        </div>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>
