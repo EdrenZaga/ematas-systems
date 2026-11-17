@@ -1,47 +1,46 @@
-# The Agent Loop
+# The Agent Loop: Gather Context, Act, Check
 
-The agent loop is the core workflow pattern for working effectively with an AI coding partner: **Gather Context $\rightarrow$ Act $\rightarrow$ Check**. Following this disciplined loop prevents hallucinations, minimizes errors, and ensures that software changes are accurate, robust, and verifiable.
+The agent loop is the core workflow pattern for working effectively with an AI coding partner: **Gather Context $\rightarrow$ Act $\rightarrow$ Check**. Following this disciplined loop prevents hallucinations, catches errors early, and ensures that software changes are accurate, robust, and verifiable.
 
 ---
 
 ## 1. Gather Context
 
-Before writing any code or modifying existing files, the agent must gather accurate context about the environment, repository state, project structure, and task requirements.
+Before taking action or generating code, the agent inspects the environment, reads existing code, analyzes errors, and gathers necessary project context.
 
-- **Inspect the Workspace**: Read existing project files, directory layouts, configuration files, and documentation rather than assuming how a project is set up.
-- **Check State**: Run diagnostic commands (such as `pwd`, `git status`, or `git remote -v`) to understand what exists, what branch is checked out, and what tools are available.
-- **Identify Gaps and Ambiguities**: Look for placeholders, missing dependencies, or unconfigured settings (such as Git credentials or remote URLs) before proceeding.
-- **Lab 1 Application**: 
-  - Checked `git remote -v` to determine if a remote origin was configured.
-  - Located the downloaded starter template in `~/Downloads/systems-starter/` when resolving the initial project setup.
-  - Clarified and identified username and email configurations before performing Git operations.
+### Labeled Moment 1: Diagnosing Missing Remotes & Starter Templates
+- **What Happened**: When trying to set up the repository and pull the starter template, the remote URL contained template placeholders (`<YOUR_GITHUB_USERNAME>`) and copying artifacts. Furthermore, running `git pull origin main` returned `remote: Repository not found`.
+- **How Context Was Gathered**: 
+  - Ran `git remote -v` and `git config -l` to inspect the local Git configuration.
+  - Queried the GitHub API for user `EdrenZaga` to check public repositories.
+  - Inspected the local filesystem and discovered the course starter files already downloaded in `~/Downloads/systems-starter/`.
+- **Key Takeaway**: Instead of blindly executing commands or guessing filenames, gathering context from the local disk and system state uncovered the exact repository structure and prevented errors.
 
 ---
 
 ## 2. Act
 
-Once context has been established, the agent takes direct, targeted, and minimal actions to advance the user's objective.
+Once context has been thoroughly established, the agent takes direct, targeted, and minimal action to complete the user's objective.
 
-- **Write Clean, Idiomatic Code**: Produce complete, robust implementations rather than placeholders or partial snippets.
-- **Keep Changes Scoped**: Focus strictly on the requirements requested by the user, adhering to clean architecture and project standards.
-- **Run Purposeful Commands**: Execute single, well-defined commands in the terminal with appropriate environment considerations.
-- **Lab 1 Application**:
-  - Implemented the To-Do list web app (`todo/index.html`, `todo/style.css`, `todo/script.js`) with task addition, strikethrough completion, deletion, filters, and local storage persistence.
-  - Implemented the Pomodoro study timer app (`pomodoro/index.html`, `pomodoro/style.css`, `pomodoro/script.js`) with 25-minute countdown, mode switching, dark mode toggle, and a gentle Web Audio API beep.
-  - Configured Git remotes and staged repository files.
+### Labeled Moment 2: Implementing and Incrementally Updating Applications
+- **What Happened**: Built the `todo` web app with filtering, task completion, and localStorage, followed by the `pomodoro` study timer. Later, updated the Pomodoro app twice to add custom mode buttons (`Focus (25m)`, `Short Break (5m)`, `Long Break (15m)`), a session counter, a dark mode toggle, and a gentle Web Audio API chime.
+- **How Action Was Taken**:
+  - Structured clean HTML with semantic tags, SVG circular timer progress, and accessible controls.
+  - Styled modular CSS custom properties supporting both light and dark themes with smooth transitions.
+  - Wrote focused JavaScript using the Web Audio API (`AudioContext`, sine wave oscillators) and persistent state management (`localStorage`).
+- **Key Takeaway**: Taking incremental, well-scoped actions makes changes easy to understand, test, and adapt.
 
 ---
 
 ## 3. Check
 
-Action is never complete until it has been verified. The check phase closes the feedback loop and confirms that the implementation matches expectations without side effects.
+Action is never complete until it has been verified. The check phase closes the feedback loop and confirms that the implementation matches expectations without side effects or syntax errors.
 
-- **Read Back Modified Files**: Re-read written files from disk to confirm formatting, structure, and integrity.
-- **Run Syntax & Linter Checks**: Execute validation tools (e.g., `node -c` for JavaScript syntax validation) to catch syntax errors before runtime.
-- **Verify Asset Linking & Selectors**: Confirm that relative links (`<link>`, `<script>`) and DOM element identifiers match between HTML, CSS, and JS.
-- **Confirm Working Tree & Status**: Run `git status` or automated tests to verify clean working directories and passing builds.
-- **Lab 1 Application**:
-  - Read back `todo/index.html`, `todo/style.css`, and `todo/script.js` to ensure proper linking and syntax.
-  - Tested JavaScript syntax using `node -c` on both `todo/script.js` and `pomodoro/script.js`.
-  - Verified dark mode classes, audio API oscillators, and button bindings.
-  - Ran `git status` to verify staged changes and untracked file handling.
+### Labeled Moment 3: Syntax Validation and Git Clean State Verification
+- **What Happened**: Verified that both the To-Do and Pomodoro applications were completely error-free and that all files were tracked and clean in Git.
+- **How Verification Was Done**:
+  - Re-read all written files (`index.html`, `style.css`, `script.js` across both apps) from disk to confirm markup and asset linking.
+  - Ran Node.js syntax checks (`node -c todo/script.js` and `node -c pomodoro/script.js`) which exited with code `0`.
+  - Captured verification screenshots (`todo.png` and `app-2.png`).
+  - Ran `git status` after staging and committing to ensure the working tree was completely clean.
+- **Key Takeaway**: Verification ensures that code doesn't just look right—it runs without runtime or syntax errors before being handed off or deployed.
