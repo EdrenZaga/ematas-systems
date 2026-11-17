@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Problem Tracker — Team Issue Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Header -->
+    <header class="top-nav">
+      <div class="nav-brand">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-text">
+          <h1>Problem Tracker</h1>
+          <span class="brand-badge">v2.0 • Structured Build</span>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <button id="toggle-form-btn" class="btn btn-primary">
+          <span class="btn-icon">+</span> Report Problem
+        </button>
+      </div>
+    </header>
+
+    <main class="content-container">
+      <!-- Metric Cards -->
+      <section class="metrics-grid" aria-label="System Metrics">
+        <div class="metric-card total">
+          <span class="metric-label">Total Problems</span>
+          <span id="metric-total" class="metric-value">0</span>
+        </div>
+        <div class="metric-card open">
+          <span class="metric-label">Open</span>
+          <span id="metric-open" class="metric-value">0</span>
+        </div>
+        <div class="metric-card in-progress">
+          <span class="metric-label">In Progress</span>
+          <span id="metric-in-progress" class="metric-value">0</span>
+        </div>
+        <div class="metric-card resolved">
+          <span class="metric-label">Resolved</span>
+          <span id="metric-resolved" class="metric-value">0</span>
+        </div>
+      </section>
+
+      <!-- New Problem Form Panel (Collapsible / Dynamic) -->
+      <section id="form-panel" class="form-panel hidden" aria-label="Report a new problem">
+        <div class="panel-header">
+          <h2>Report a New Problem</h2>
+          <button id="close-form-btn" class="btn-close" aria-label="Close form">&times;</button>
+        </div>
+        <form id="problem-form" class="problem-form" autocomplete="off">
+          <div class="form-group">
+            <label for="problem-title">Problem Title <span class="required">*</span></label>
+            <input type="text" id="problem-title" placeholder="Brief summary of the issue (e.g. Broken checkout button)" required minlength="4">
+          </div>
+
+          <div class="form-group">
+            <label for="problem-desc">Description & Reproduction Steps <span class="required">*</span></label>
+            <textarea id="problem-desc" rows="3" placeholder="Explain what happened, what was expected, and steps to reproduce..." required></textarea>
+          </div>
+
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label for="problem-severity">Severity Level</label>
+              <select id="problem-severity">
+                <option value="Low">🟢 Low</option>
+                <option value="Medium" selected>🟡 Medium</option>
+                <option value="High">🟠 High</option>
+                <option value="Critical">🔴 Critical</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="problem-category">Category</label>
+              <select id="problem-category">
+                <option value="Bug">Bug / Defect</option>
+                <option value="Feature">Feature Request</option>
+                <option value="UI/UX">UI / UX Issue</option>
+                <option value="Performance">Performance</option>
+                <option value="Security">Security</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="problem-reporter">Reporter Name <span class="required">*</span></label>
+              <input type="text" id="problem-reporter" placeholder="Your name or team" required>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Submit Problem Report</button>
+            <button type="button" id="cancel-form-btn" class="btn btn-secondary">Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Filter & Search Toolbar -->
+      <section class="toolbar" aria-label="Search and Filters">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" placeholder="Search by title, description, or reporter..." aria-label="Search problems">
+          <button type="button" id="clear-search-btn" class="btn-clear hidden" aria-label="Clear search">&times;</button>
+        </div>
+
+        <div class="filter-controls">
+          <div class="filter-group">
+            <label for="filter-status">Status:</label>
+            <select id="filter-status">
+              <option value="All">All Statuses</option>
+              <option value="Open">Open</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="filter-severity">Severity:</label>
+            <select id="filter-severity">
+              <option value="All">All Severities</option>
+              <option value="Critical">Critical</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Problems List -->
+      <section class="list-section">
+        <div id="problems-container" class="problems-grid" aria-live="polite"></div>
+
+        <div id="empty-state" class="empty-state hidden">
+          <div class="empty-icon">📋</div>
+          <h3>No problems found</h3>
+          <p class="empty-desc">No issues match the current filter and search criteria.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Problem Tracker • Lab 2: Direct the Agent and Deploy • BMIS 301</p>
+    </footer>
+  </div>
+</body>
+</html>

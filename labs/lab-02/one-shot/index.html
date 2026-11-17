@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Problem Tracker (One-Shot Build)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Issue & Problem Tracker</h1>
+      <p class="subtitle">Built with one giant prompt</p>
+    </header>
+
+    <div class="form-container">
+      <h2>Log New Problem</h2>
+      <form id="problem-form">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" placeholder="Summary of the problem" required>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" rows="3" placeholder="Describe what went wrong" required></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="severity">Severity</label>
+            <select id="severity">
+              <option value="Low">Low</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="High">High</option>
+              <option value="Critical">Critical</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category">
+              <option value="Bug">Bug</option>
+              <option value="Feature">Feature Request</option>
+              <option value="UI">UI / UX</option>
+              <option value="Performance">Performance</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" id="submit-btn">Submit Problem</button>
+      </form>
+    </div>
+
+    <div class="tracker-section">
+      <div class="filter-bar">
+        <h2>Reported Problems</h2>
+        <div class="filters">
+          <select id="status-filter">
+            <option value="All">All Statuses</option>
+            <option value="Open">Open</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="problem-list" class="problem-list"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

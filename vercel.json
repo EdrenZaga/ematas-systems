@@ -1,0 +1,10 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/labs/lab-02/problem-tracker/index.html" },
+    { "source": "/problem-tracker/(.*)", "destination": "/labs/lab-02/problem-tracker/$1" },
+    { "source": "/one-shot/(.*)", "destination": "/labs/lab-02/one-shot/$1" },
+    { "source": "/todo/(.*)", "destination": "/labs/lab-01/todo/$1" },
+    { "source": "/pomodoro/(.*)", "destination": "/labs/lab-01/pomodoro/$1" }
+  ]
+}
